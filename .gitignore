@@ -1,13 +1,13 @@
 #folders
+.cipd
+herond
 node_modules
 src
-herond
 
 #files
-.vs
-.cipd
+.herond_latest_successful_sync.json
 .gclient
 .gclient_entries
 .gclient_previous_custom_vars
 .gclient_previous_sync_commits
-.herond_latest_successful_sync.json
+.vs
