@@ -1,3 +1,13 @@
+#folders
 node_modules
 src
+herond
+
+#files
 .vs
+.cipd
+.gclient
+.gclient_entries
+.gclient_previous_custom_vars
+.gclient_previous_sync_commits
+.herond_latest_successful_sync.json

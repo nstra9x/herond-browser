@@ -12,15 +12,12 @@ const util = require('../lib/util')
 
 Log.progress('Performing initial checkout of herond-core')
 
-const srcDir = path.resolve(__dirname, '..', '..', 'src')
-const herondCoreDir = path.resolve(__dirname, srcDir, 'herond')
+const rootDir = path.resolve(__dirname, '..', '..')
+const herondCoreDir = path.resolve(__dirname, rootDir, 'herond')
 const herondCoreRef = util.getProjectVersion(args[0])
 
 if (!fs.existsSync(path.join(herondCoreDir, '.git'))) {
     Log.status(`Cloning herond-core [${herondCoreRef}] into ${herondCoreDir}...`)
-    if (!fs.existsSync(srcDir)) {
-        fs.mkdirSync(srcDir)
-    }
     fs.mkdirSync(herondCoreDir)
     util.runGit(herondCoreDir, ['clone', util.getNPMConfig(['projects', 'herond-core', 'repository', 'url']), '.'])
     util.runGit(herondCoreDir, ['checkout', herondCoreRef])
@@ -36,7 +33,6 @@ if (process.platform === 'win32') {
 
 util.run(npmCommand, ['install'], { cwd: herondCoreDir })
 
-Log.progress('==========================================')
 util.run(npmCommand, ['run', 'sync' ,'--', '--init'].concat(process.argv.slice(2)), {
   cwd: herondCoreDir,
   env: process.env,
