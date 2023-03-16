@@ -12,13 +12,13 @@ const util = require('../lib/util')
 
 Log.progress('Performing initial checkout of herond-core')
 
-const rootDir = path.resolve(__dirname, '..', '..')
+const rootDir = path.resolve(__dirname, '..', 'src')
 const herondCoreDir = path.resolve(__dirname, rootDir, 'herond')
 const herondCoreRef = util.getProjectVersion(args[0])
 
 if (!fs.existsSync(path.join(herondCoreDir, '.git'))) {
     Log.status(`Cloning herond-core [${herondCoreRef}] into ${herondCoreDir}...`)
-    fs.mkdirSync(herondCoreDir)
+    fs.mkdirSync(herondCoreDir, { recursive: true })
     util.runGit(herondCoreDir, ['clone', util.getNPMConfig(['projects', 'herond-core', 'repository', 'url']), '.'])
     util.runGit(herondCoreDir, ['checkout', herondCoreRef])
 }
